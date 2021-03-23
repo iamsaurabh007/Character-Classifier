@@ -9,7 +9,7 @@ dir_path="/home/ubuntu/data/ocr/out"
 device=None
 
 #USED IN DATALOADER
-batch_size=32
+batch_size=256
 shuffle=True
 num_workers=6
 
