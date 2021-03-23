@@ -17,15 +17,16 @@ import utils
 import config
 import DataUtils
 
+out_chnl=config.channel
 
 class Conv_block(nn.Module):
     def __init__(self,inp=3):
         super(Conv_block,self).__init__()
-        self.conv1=nn.Conv2d(in_channels=inp,out_channels=64,kernel_size=3)
-        self.conv2a=nn.Conv2d(in_channels=inp,out_channels=64,kernel_size=3,padding=(1,1))
-        self.conv2b=nn.Conv2d(in_channels=64,out_channels=64,kernel_size=3)
-        self.conv3=nn.Conv2d(in_channels=inp,out_channels=64,kernel_size=3,dilation=2,padding=(1,1))
-        self.instance_norm=nn.InstanceNorm2d(num_features=64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        self.conv1=nn.Conv2d(in_channels=inp,out_channels=out_chnl,kernel_size=3)
+        self.conv2a=nn.Conv2d(in_channels=inp,out_channels=out_chnl,kernel_size=3,padding=(1,1))
+        self.conv2b=nn.Conv2d(in_channels=out_chnl,out_channels=out_chnl,kernel_size=3)
+        self.conv3=nn.Conv2d(in_channels=inp,out_channels=out_chnl,kernel_size=3,dilation=2,padding=(1,1))
+        self.instance_norm=nn.InstanceNorm2d(num_features=out_chnl, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
         self.drop=nn.Dropout2d(p=0.05, inplace=False)
         self.drop2=torch.nn.Dropout(p=0.5, inplace=False)
         self.pool=nn.MaxPool2d(2, stride=2, padding=0, dilation=1, return_indices=False, ceil_mode=False)
@@ -63,8 +64,8 @@ class Symbol_Model(nn.Module):
     def __init__(self  ):
         super(Symbol_Model,self).__init__()
         self.conv_block1=Conv_block()
-        self.conv_block2=Conv_block(384)
-        self.conv1=nn.Conv2d(in_channels=384,out_channels=config.num_classes,kernel_size=1)
+        self.conv_block2=Conv_block(out_chnl*6)
+        self.conv1=nn.Conv2d(in_channels=out_chnl*6,out_channels=config.num_classes,kernel_size=1)
     
     def forward(self,x):
         x=self.conv_block1(x)
