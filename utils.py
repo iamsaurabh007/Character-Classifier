@@ -37,7 +37,7 @@ def get_images_list(mypath,number=None):
     onlyfiles = [f[:-5] for f in listdir(mypath) if isfile(join(mypath, f))]
     random.shuffle(onlyfiles)
     if number:
-        onlyfiles=onlyfile[:number]
+        onlyfiles=onlyfiles[:number]
     return onlyfiles[:int(0.95*len(onlyfiles))],onlyfiles[int(0.95*len(onlyfiles)):]
 
 
