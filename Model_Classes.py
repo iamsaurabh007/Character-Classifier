@@ -126,7 +126,7 @@ def fit(epochs, lr, model, train_loader, val_loader,writer,opt_func=torch.optim.
             optimizer.step()
             optimizer.zero_grad()
             running_loss+=loss.item()
-        print("Training done at epoch",epoch)
+        print("Training done at epoch",epoch,"training_loss=",running_loss)
         writer.add_scalar('training loss per epoch',running_loss,epoch)
         # Validation phase
         result = evaluate(model, val_loader)
