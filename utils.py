@@ -30,7 +30,7 @@ def create_label_dict(symbols):
     label={}
     for i,sym in enumerate(symbols):
         label[sym]=i
-    print("Dictionary Created with {} symbols".format(len(symbols))
+    print("Dictionary Created with {} symbols".format(len(symbols)))
     return label
 
 def get_images_list(mypath,number=None):
