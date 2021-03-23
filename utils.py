@@ -32,10 +32,12 @@ def create_label_dict(symbols):
         label[sym]=i
     return label
 
-def get_images_list(mypath):
+def get_images_list(mypath,number=None):
     #Currently jpeg implementation only
     onlyfiles = [f[:-5] for f in listdir(mypath) if isfile(join(mypath, f))]
     random.shuffle(onlyfiles)
+    if number:
+        onlyfiles=onlyfile[:number]
     return onlyfiles[:int(0.95*len(onlyfiles))],onlyfiles[int(0.95*len(onlyfiles)):]
 
 
