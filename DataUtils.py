@@ -33,14 +33,38 @@ class IMGDS(data.Dataset):
         self.images_list=imglist
 
     def loadimage(self,index):
-        image = Image.open(self.root_dir+"/imgs/"+self.images_list[index]+".jpeg")
-        image=np.array(image)
+        im = Image.open(self.root_dir+"/imgs/"+self.images_list[index]+".jpeg")
+        
+        desired_size = 200
+        
+        old_size = im.size  # old_size[0] is in (width, height) format
+
+        #ratio = float(desired_size)/max(old_size)
+        #new_size = tuple([int(x*ratio) for x in old_size])
+        # use thumbnail() or resize() method to resize the input image
+
+        # thumbnail is a in-place operation
+
+        # im.thumbnail(new_size, Image.ANTIALIAS)
+
+        #im = im.resize(new_size, Image.ANTIALIAS)
+        # create a new image and paste the resized on it
+
+        new_im = Image.new("RGB", (desired_size, desired_size),color = (255,255, 255))
+        a=(desired_size-old_size[0])//2
+        b=(desired_size-old_size[1])//2
+        new_im.paste(im, (a,b))
+        image=np.array(new_im)
         image=image/255
         image=image-1
-        image = torch.from_numpy(image.astype('float32'))
+        image=image.astype('float32')
+        image=torchvision.transforms.functional.to_tensor(image)
+        #image=image.float()
+        #image = torch.from_numpy(image)
         #image=torchvision.transforms.functional.to_tensor(image)
         #image=image.float()
         return image
+        #return image
     def loadlabel(self,index):
         with open(self.root_dir+"/json/"+self.images_list[index]+".json") as f:
             d= json.load(f)
@@ -61,7 +85,6 @@ class IMGDS(data.Dataset):
 #         if self.transform:
 #             sample = self.transform(sample)
         return image,label
-
 
 
 class DeviceDataLoader():
