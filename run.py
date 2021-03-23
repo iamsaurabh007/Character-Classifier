@@ -19,16 +19,18 @@ import config
 import DataUtils
 import Model_Classes
 
-dir_path=config.dir_path
-device=config.device
-num_epochs=config.num_epochs
-#l_r=config.learning_rate
-#batch_size=config.batch_size
-shuffle=config.shuffle
-num_worker=config.num_workers
+
 
 #if __name__ =='__main__':
 def RUN(l_r,batch_size):
+    dir_path=config.dir_path
+    device=config.device
+    num_epochs=config.num_epochs
+    #l_r=config.learning_rate
+    #batch_size=config.batch_size
+    shuffle=config.shuffle
+    num_worker=config.num_workers
+
     if device==None:
         device = utils.get_default_device()
     print("Device is ",device)
