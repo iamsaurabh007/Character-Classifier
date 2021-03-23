@@ -28,7 +28,7 @@ shuffle=config.shuffle
 num_worker=config.num_workers
 
 #if __name__ =='__main__':
-def RUN(l_r,batch_size)
+def RUN(l_r,batch_size):
     if device==None:
         device = utils.get_default_device()
     print("Device is ",device)
