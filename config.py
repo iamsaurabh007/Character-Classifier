@@ -16,7 +16,7 @@ num_workers=6
 
 #USED IN MODEL
 learning_rate=0.001
-num_epochs=1
+num_epochs=50
 
 #channels
 channel=32
