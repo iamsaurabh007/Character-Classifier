@@ -37,9 +37,9 @@ class IMGDS(data.Dataset):
         image=np.array(image)
         image=image/255
         image=image-1
-        image.astype('float32')
-        image=torchvision.transforms.functional.to_tensor(image)
-        image=image.float()
+        image = torch.from_numpy(image.astype('float32'))
+        #image=torchvision.transforms.functional.to_tensor(image)
+        #image=image.float()
         return image
     def loadlabel(self,index):
         with open(self.root_dir+"/json/"+self.images_list[index]+".json") as f:
