@@ -24,7 +24,7 @@ device=config.device
 num_epochs=config.num_epochs
 l_r=config.learning_rate
 batch_size=config.batch_size
-shuffle=config.batch_size
+shuffle=config.shuffle
 num_worker=config.num_workers
 
 if __name__ =='__main__':
