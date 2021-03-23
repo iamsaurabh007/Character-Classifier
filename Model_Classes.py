@@ -64,7 +64,7 @@ class Symbol_Model(nn.Module):
         super(Symbol_Model,self).__init__()
         self.conv_block1=Conv_block()
         self.conv_block2=Conv_block(384)
-        self.conv1=nn.Conv2d(in_channels=384,out_channels=97,kernel_size=1)
+        self.conv1=nn.Conv2d(in_channels=384,out_channels=config.num_classes,kernel_size=1)
     
     def forward(self,x):
         x=self.conv_block1(x)

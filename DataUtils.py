@@ -69,7 +69,7 @@ class IMGDS(data.Dataset):
         with open(self.root_dir+"/json/"+self.images_list[index]+".json") as f:
             d= json.load(f)
             label=d['image']['character']
-            a=np.zeros((97))
+            a=np.zeros((config.num_classes))
             a=a+0.5
             a[self.label_dict[label]]=0.9
             a=torch.from_numpy(a)
