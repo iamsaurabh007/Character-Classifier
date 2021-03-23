@@ -31,6 +31,7 @@ if __name__ =='__main__':
 
     if device==None:
         device = utils.get_default_device()
+    print("Device is ",device)
     label_dict=utils.create_label_dict(config.symbols)
     imglist_train,imglist_val=utils.get_images_list(dir_path+"/imgs",number=10000)
     ds_train=DataUtils.IMGDS(label_dict,dir_path,imglist_train)
