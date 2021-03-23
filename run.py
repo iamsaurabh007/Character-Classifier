@@ -42,6 +42,6 @@ def RUN(l_r,batch_size):
     valid_gen = DataUtils.DeviceDataLoader(valid_gen, device)
     model=Model_Classes.Symbol_Model()
     model=utils.to_device(model, device)
-    p='runs/LR'+string(10000*l_r)'BS'+string(batch_size)
+    p='runs/LR'+string(10000*l_r)+'BS'+string(batch_size)
     writer = SummaryWriter(p)
     history=Model_Classes.fit(num_epochs,l_r,model,train_gen, valid_gen, opt_func=torch.optim.SGD,writer=writer)
