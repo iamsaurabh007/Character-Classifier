@@ -30,6 +30,7 @@ def create_label_dict(symbols):
     label={}
     for i,sym in enumerate(symbols):
         label[sym]=i
+    print("Dictionary Created with {} symbols".format(len(symbols))
     return label
 
 def get_images_list(mypath,number=None):
@@ -37,7 +38,8 @@ def get_images_list(mypath,number=None):
     onlyfiles = [f[:-5] for f in listdir(mypath) if isfile(join(mypath, f))]
     random.shuffle(onlyfiles)
     if number:
-        onlyfiles=onlyfiles[:number]    
+        onlyfiles=onlyfiles[:number]   
+    print("Images Available Train={}, Valid={} ".format(int(0.95*len(onlyfiles)),int(0.05*len(onlyfiles)))) 
     return onlyfiles[:int(0.95*len(onlyfiles))],onlyfiles[int(0.95*len(onlyfiles)):]
 
 

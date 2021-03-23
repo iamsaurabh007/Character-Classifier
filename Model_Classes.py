@@ -80,7 +80,7 @@ class Symbol_Model(nn.Module):
         return x
     
     def loss_fn(self, output, target):
-        loss = torch.exp(torch.sum((output - target)**2))
+        loss = torch.exp(torch.mean((output - target)**2))
         return loss
     
     def training_step(self, batch):
