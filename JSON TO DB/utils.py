@@ -3,7 +3,7 @@ import json
 
 def get_images_list(mypath):
     #Currently jpeg implementation only
-    onlyfiles = [f[:-5] for f in listdir(mypath) if isfile(join(mypath, f))
+    onlyfiles = [f[:-5] for f in listdir(mypath) if isfile(join(mypath, f))]
     print("Images Available : {} ".format(len(onlyfiles))) 
     return onlyfiles
 
