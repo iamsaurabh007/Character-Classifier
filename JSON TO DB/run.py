@@ -15,7 +15,7 @@ from pymongo import MongoClient
 train_queue = Queue() #queue.Queue()
 chuck_count = 0
 client = MongoClient()
-myclient   = pymongo.MongoClient()
+myclient   = pymongo.MongoClient('mongodb://localhost:27017')
 mydb       = myclient[DBNAME]
 collection = mydb.chardataset
 
