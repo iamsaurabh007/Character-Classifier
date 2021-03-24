@@ -1,5 +1,6 @@
 import json
-
+from os import listdir
+from os.path import isfile, join
 
 def get_images_list(mypath):
     #Currently jpeg implementation only
@@ -12,7 +13,7 @@ def generator(path):
     for i in ls:
         yield i
         
-def put_json_to_database(img,dirpath,clientcollect):   #################
+def put_json_to_database(img,dirpath,client_collect):   #################
     with open(dirpath+img+'.json') as f:
         data = json.load(f)
     p=data['image']

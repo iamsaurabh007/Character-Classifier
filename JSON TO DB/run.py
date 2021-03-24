@@ -14,14 +14,16 @@ from pymongo import MongoClient
 
 train_queue = Queue() #queue.Queue()
 chuck_count = 0
+client = MongoClient()
+myclient   = pymongo.MongoClient()
+mydb       = myclient[DBNAME]
+collection = mydb.chardataset
 
 def train_chunk():
     while True:
-        client = MongoClient()
-        myclient   = pymongo.MongoClient('mongodb://localhost:27017')
-        mydb       = myclient[DBNAME]
-        collection = mydb.chardataset
+        
         img=train_queue.get(block=True)
+        #print('1')
         put_json_to_database(img,JSONPATH,collection)
         
 def start_threads(thread_count):
@@ -42,10 +44,10 @@ if __name__ == '__main__':
                 im = para.__next__()
                 train_queue.put(im)
                 #time.sleep(.1)
-            except Exception as e:
+            except StopIteration:
                 p=True
                 break
-            #time.sleep(.1)
+            #time.sleep(1)
             #print('chunks in queue: {}'.format(train_queue.qsize()))
             
         time.sleep(0.05)
