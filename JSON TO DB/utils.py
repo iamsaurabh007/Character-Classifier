@@ -19,3 +19,24 @@ def put_json_to_database(img,dirpath,client_collect):   #################
     p=data['image']
     p['_id']=p.pop('image_id')
     client_collect.insert_one(p)
+
+
+
+def sampledds(client,length):
+    ls=[]
+    characters=config.symbols
+    s=length//len(characters)
+    for ch in characters:
+        myquery = { "character": ch }
+        p=[]
+        for i in client.find(myquery):
+            p.append(i['_id'])
+        q=min(s,len(p))
+        random.shuffle(p)
+        ls.extend(p[:s])
+    print("Length of Data Samples Returned with even distribution is: ", len(ls))    
+    return ls
+
+    
+def list_to_csv(ls,filename):
+    np.savetxt(filename+".csv",ls,delimiter =", ", fmt ='% s')
