@@ -6,6 +6,7 @@ symbols.append(" ")
 num_classes=len(symbols)
 
 dir_path="/home/ubuntu/data/ocr/out"
+csv_path='/home/ubuntu/Character-Classifier/hypergridcsv'
 device=None
 
 #USED IN DATALOADER

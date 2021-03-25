@@ -13,7 +13,7 @@ import random
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+import csv
 
 def get_default_device():
     """Pick GPU if available, else CPU"""
@@ -48,3 +48,10 @@ def to_device(data, device):
     if isinstance(data, (list,tuple)):
         return [to_device(x, device) for x in data]
     return data.to(device, non_blocking=True)
+
+def csv_to_ls(path):
+    ls=[]
+    with open(path,newline='') as f:
+        reader = csv.reader(f)
+        ls=[row[0] for row in reader]
+    return ls
