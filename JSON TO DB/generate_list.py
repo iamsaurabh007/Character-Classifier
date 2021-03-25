@@ -4,7 +4,6 @@ import pymongo
 from config import DBNAME,symbols
 
 if __name__ == '__main__':
-    train_ls_grid=utils.sampledds()
     client = MongoClient()
     myclient   = pymongo.MongoClient('mongodb://localhost:27017')
     mydb       = myclient[DBNAME]
