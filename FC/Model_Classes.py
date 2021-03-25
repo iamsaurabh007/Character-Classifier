@@ -75,7 +75,7 @@ class FC_Model(nn.Module):
         super(FC_Model,self).__init__()
         self.conv_block1=Conv_block()
         self.conv_block2=Conv_block(out_chnl*6)
-        self.conv1=nn.Conv2d(in_channels=out_channel*6,out_channels=256,kernel_size=1)
+        self.conv1=nn.Conv2d(in_channels=out_chnl*6,out_channels=256,kernel_size=1)
         self.linearblock1=LINEAR_BLOCK(in_features=256, out_features=512, bias=True)
         self.linear2=nn.Linear(in_features=512, out_features=config.num_classes, bias=True)
         self.loss_fn=t=nn.CrossEntropyLoss()
