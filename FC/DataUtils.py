@@ -54,7 +54,7 @@ class IMGDS(data.Dataset):
         with open(self.root_dir+"/json/"+self.images_list[index]+".json") as f:
             d= json.load(f)
             label=d['image']['character']
-            a=np.array(label_dict[label])
+            a=np.array(self.label_dict[label])
             a=torch.from_numpy(a)
             return a
     def __len__(self):
