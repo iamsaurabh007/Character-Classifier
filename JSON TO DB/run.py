@@ -17,7 +17,7 @@ chuck_count = 0
 client = MongoClient()
 myclient   = pymongo.MongoClient('mongodb://localhost:27017')
 mydb       = myclient[DBNAME]
-collection = mydb.chardataset
+collection = mydb.chardata
 
 def train_chunk():
     while True:
