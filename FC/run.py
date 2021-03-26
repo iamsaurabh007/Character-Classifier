@@ -21,13 +21,13 @@ import Model_Classes
 
 
 
-#if __name__ =='__main__':
-def RUN(l_r,batch_size):
-    dir_path=config.dir_path
+if __name__ =='__main__':
+#def RUN(l_r,batch_size):
+    dir_path=config.data_dir_path
     device=config.device
     num_epochs=config.num_epochs
-    #l_r=config.learning_rate
-    #batch_size=config.batch_size
+    l_r=config.learning_rate
+    batch_size=config.batch_size
     shuffle=config.shuffle
     num_worker=config.num_workers
 
@@ -35,9 +35,9 @@ def RUN(l_r,batch_size):
         device = utils.get_default_device()
     print("Device is ",device)
     label_dict=utils.create_label_dict(config.symbols)
-    #imglist_train,imglist_val=utils.get_images_list(dir_path+"/imgs",number=5500)
-    imglist_train=utils.csv_to_ls(config.csv_path+"/train_grid_imgs.csv")
-    imglist_val=utils.csv_to_ls(config.csv_path+"/valid_grid_imgs.csv")
+    imglist_train,imglist_val=utils.get_images_list(dir_path+"/imgs")
+    #imglist_train=utils.csv_to_ls(config.csv_path+"/train_grid_imgs.csv")
+    #imglist_val=utils.csv_to_ls(config.csv_path+"/valid_grid_imgs.csv")
     ds_train=DataUtils.IMGDS(label_dict,dir_path,imglist_train)
     ds_val=DataUtils.IMGDS(label_dict,dir_path,imglist_val)
     train_gen = torch.utils.data.DataLoader(ds_train ,batch_size=batch_size,shuffle=shuffle,num_workers =num_worker)

@@ -34,14 +34,6 @@ class IMGDS(data.Dataset):
 
     def loadimage(self,index):
         im = Image.open(self.root_dir+"/imgs/"+self.images_list[index]+".jpeg")
-        
-        desired_size = 200
-        
-        old_size = im.size
-        new_im = Image.new("RGB", (desired_size, desired_size),color = (255,255, 255))
-        a=(desired_size-old_size[0])//2
-        b=(desired_size-old_size[1])//2
-        new_im.paste(im, (a,b))
         image=np.array(new_im)
         image=image/255
         image=image-1

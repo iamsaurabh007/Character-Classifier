@@ -5,21 +5,24 @@ symbols.append(u"\u2122")
 symbols.append(" ")
 num_classes=len(symbols)
 
-dir_path="/home/ubuntu/data/ocr/out"
+data_dir_path="/home/ubuntu/data/ocr/out"
 csv_path='/home/ubuntu/Character-Classifier/FC/hypergridcsv'
+MODELCHECKPOINT_PATH="/home/ubuntu/data/ocr/ModelPT"
 device=None
+
+
+
 
 #USED IN DATALOADER
 batch_size=16
 shuffle=True
 num_workers=6
 
-
 #USED IN MODEL
 learning_rate=0.001
-num_epochs=50
+num_epochs=500
 
 #channels
-channel=32
+channel=64
 
 

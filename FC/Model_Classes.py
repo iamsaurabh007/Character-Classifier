@@ -18,7 +18,7 @@ import config
 import DataUtils
 
 out_chnl=config.channel
-
+model_dir=config.MODELCHECKPOINT_PATH
 
 class LINEAR_BLOCK(nn.Module):
     def __init__(self,in_features,out_features,bias):
@@ -88,8 +88,8 @@ class FC_Model(nn.Module):
         #print(x.shape)
         x=self.conv1(x)
         #print(x.shape)
-        x=x.abs()
-        x=x.mean(dim=(2,3))
+        #x=x.abs()
+        x=x.sum(dim=(2,3))
         #print(x.shape)
         x=self.linearblock1(x)
         #print(x.shape)
@@ -153,4 +153,11 @@ def fit(epochs, lr, model, train_loader, val_loader,writer,opt_func):
         writer.add_scalar('validation acc per epoch',result['val_acc'],epoch)
         model.epoch_end(epoch, result)
         history.append(result)
+        if epoch%5==4:
+            torch.save({
+                        'epoch': epoch,
+                        'model_state_dict': model.state_dict(),
+                        'optimizer_state_dict': optimizer.state_dict(),
+                        'loss': loss_mean,
+                        }, os.path.join(model_dir, 'epoch-{}.pt'.format(epoch)))
     return history
