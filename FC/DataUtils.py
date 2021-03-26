@@ -34,7 +34,7 @@ class IMGDS(data.Dataset):
 
     def loadimage(self,index):
         im = Image.open(self.root_dir+"/imgs/"+self.images_list[index]+".jpeg")
-        image=np.array(new_im)
+        image=np.array(im)
         image=image/255
         image=image-1
         image=image.astype('float32')
