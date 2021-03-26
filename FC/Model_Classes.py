@@ -111,7 +111,7 @@ class FC_Model(nn.Module):
             out = self(images)                    # Generate predictions
             loss = self.loss_fn(out, labels)   # Calculate loss
         acc = accuracy(out, labels)           # Calculate accuracy
-        return {'val_loss': loss.item(), 'val_acc': acc}
+        return {'val_loss': loss, 'val_acc': acc}
         
     def validation_epoch_end(self, outputs):
         batch_losses = [x['val_loss'] for x in outputs]
