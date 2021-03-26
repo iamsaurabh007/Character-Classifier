@@ -153,7 +153,7 @@ def fit(epochs, lr, model, train_loader, val_loader,writer,opt_func):
         writer.add_scalar('validation acc per epoch',result['val_acc'],epoch)
         model.epoch_end(epoch, result)
         history.append(result)
-        if epoch%5==4:
+        if epoch%5==1:
             torch.save({
                         'epoch': epoch,
                         'model_state_dict': model.state_dict(),
