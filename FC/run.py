@@ -23,6 +23,7 @@ import Model_Classes
 
 if __name__ =='__main__':
 #def RUN(l_r,batch_size):
+    os.system('mkdir -p ' +config.MODELCHECKPOINT_PATH)
     dir_path=config.data_dir_path
     device=config.device
     num_epochs=config.num_epochs
