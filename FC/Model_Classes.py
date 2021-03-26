@@ -106,8 +106,8 @@ class FC_Model(nn.Module):
         return loss
     
     def validation_step(self, batch):
-        with torch.no_grad():
-            images, labels = batch 
+        images, labels = batch 
+        with torch.no_grad(): 
             out = self(images)                    # Generate predictions
             loss = self.loss_fn(out, labels)   # Calculate loss
         acc = accuracy(out, labels)           # Calculate accuracy
