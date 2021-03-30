@@ -47,6 +47,6 @@ if __name__ =='__main__':
     valid_gen = DataUtils.DeviceDataLoader(valid_gen, device)
     model=Model_Classes.FC_Model()
     model=utils.to_device(model, device)
-    p='runs/MODEL2fullrun/LR'+str(int(100000*l_r))+'BS'+str(batch_size)
+    p='runs/MODEL2samplerun2/LR'+str(int(100000*l_r))+'BS'+str(batch_size)
     writer = SummaryWriter(p)
     history=Model_Classes.fit(num_epochs,l_r,model,train_gen, valid_gen, opt_func=torch.optim.Adam,writer=writer)
