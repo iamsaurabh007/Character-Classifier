@@ -62,7 +62,7 @@ class Conv_block(nn.Module):
         #print(a.shape)
         a=self.c_relu(a)
         #print(a.shape)
-        b=self.layernorm(a)
+        b=self.instance_norm(a)
         #print(b.shape)
         b=self.drop(b)
         #print(b.shape)
