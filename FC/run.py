@@ -24,6 +24,7 @@ import Model_Classes
 if __name__ =='__main__':
 #def RUN(l_r,batch_size):
     os.system('mkdir -p ' +config.MODELCHECKPOINT_PATH)
+    random.seed(10)
     dir_path=config.data_dir_path
     device=config.device
     num_epochs=config.num_epochs
@@ -36,7 +37,7 @@ if __name__ =='__main__':
         device = utils.get_default_device()
     print("Device is ",device)
     label_dict=utils.create_label_dict(config.symbols)
-    imglist_train,imglist_val=utils.get_images_list(dir_path+"/imgs",5000)
+    imglist_train,imglist_val=utils.get_images_list(dir_path+"/imgs",100000)
     #imglist_train=utils.csv_to_ls(config.csv_path+"/train_grid_imgs.csv")
     #imglist_val=utils.csv_to_ls(config.csv_path+"/valid_grid_imgs.csv")
     ds_train=DataUtils.IMGDS(label_dict,dir_path,imglist_train)

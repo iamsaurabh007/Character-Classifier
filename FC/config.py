@@ -14,15 +14,15 @@ device=None
 
 
 #USED IN DATALOADER
-batch_size=16
+batch_size=64
 shuffle=True
 num_workers=6
 
 #USED IN MODEL
 learning_rate=0.001
-num_epochs=500
+num_epochs=50
 
 #channels
-channel=64
+channel=32
 
 
