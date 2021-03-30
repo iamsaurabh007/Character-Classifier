@@ -36,7 +36,7 @@ if __name__ =='__main__':
         device = utils.get_default_device()
     print("Device is ",device)
     label_dict=utils.create_label_dict(config.symbols)
-    imglist_train,imglist_val=utils.get_images_list(dir_path+"/imgs")
+    imglist_train,imglist_val=utils.get_images_list(dir_path+"/imgs",5000)
     #imglist_train=utils.csv_to_ls(config.csv_path+"/train_grid_imgs.csv")
     #imglist_val=utils.csv_to_ls(config.csv_path+"/valid_grid_imgs.csv")
     ds_train=DataUtils.IMGDS(label_dict,dir_path,imglist_train)

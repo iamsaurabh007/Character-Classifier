@@ -36,7 +36,8 @@ class Conv_block(nn.Module):
         self.conv2a=nn.Conv2d(in_channels=inp,out_channels=out_chnl,kernel_size=3,padding=(1,1))
         self.conv2b=nn.Conv2d(in_channels=out_chnl,out_channels=out_chnl,kernel_size=3)
         self.conv3=nn.Conv2d(in_channels=inp,out_channels=out_chnl,kernel_size=3,dilation=2,padding=(1,1))
-        self.instance_norm=nn.InstanceNorm2d(num_features=out_chnl, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        '''self.instance_norm=nn.InstanceNorm2d(num_features=out_chnl*6, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)'''
+        self.layernorm=nn.LayerNorm(out_chnl*6) #CHECK WITH DIMENSION OVER NORMALIZATION NOW AT CHANNEL
         self.drop=nn.Dropout2d(p=0.005, inplace=False)
         self.drop2=torch.nn.Dropout(p=0.2, inplace=False)
         self.pool=nn.MaxPool2d(2, stride=2, padding=0, dilation=1, return_indices=False, ceil_mode=False)
@@ -61,7 +62,7 @@ class Conv_block(nn.Module):
         #print(a.shape)
         a=self.c_relu(a)
         #print(a.shape)
-        b=self.instance_norm(a)
+        b=self.layernorm(a)
         #print(b.shape)
         b=self.drop(b)
         #print(b.shape)
@@ -75,10 +76,11 @@ class FC_Model(nn.Module):
         super(FC_Model,self).__init__()
         self.conv_block1=Conv_block()
         self.conv_block2=Conv_block(out_chnl*6)
-        self.conv1=nn.Conv2d(in_channels=out_chnl*6,out_channels=256,kernel_size=1)
-        self.linearblock1=LINEAR_BLOCK(in_features=256, out_features=512, bias=True)
-        self.linear2=nn.Linear(in_features=512, out_features=config.num_classes, bias=True)
-        self.loss_fn=t=nn.CrossEntropyLoss()
+        self.conv1=nn.Conv2d(in_channels=out_chnl*6,out_channels=512,kernel_size=1)
+        self.linearblock1=LINEAR_BLOCK(in_features=512, out_features=512, bias=True)
+        self.linearblock2=LINEAR_BLOCK(in_features=512, out_features=256, bias=True)
+        self.linear2=nn.Linear(in_features=256, out_features=config.num_classes, bias=True)
+        self.loss_fn=nn.CrossEntropyLoss()
     
     def forward(self,x):
         #print(x.shape)
@@ -92,6 +94,7 @@ class FC_Model(nn.Module):
         x=x.sum(dim=(2,3))
         #print(x.shape)
         x=self.linearblock1(x)
+        x=self.linearblock2(x)
         #print(x.shape)
         x=self.linear2(x)
         #print("FINAL TENSOR")
@@ -134,15 +137,15 @@ def evaluate(model, val_loader):
 
 def fit(epochs, lr, model, train_loader, val_loader,writer,opt_func):
     history = []
-    optimizer = opt_func(model.parameters(), lr)
+    optimizer = opt_func(model.parameters(), lr, weight_decay=1e-4)
     for epoch in range(epochs):
         # Training Phase 
         running_loss=[]
         for batch in train_loader:
+            optimizer.zero_grad()
             loss = model.training_step(batch)
             loss.backward()
             optimizer.step()
-            optimizer.zero_grad()
             running_loss.append(loss.item())
         loss_mean=sum(running_loss) / len(running_loss)
         print("Training done at epoch",epoch,"training_loss=",loss_mean)

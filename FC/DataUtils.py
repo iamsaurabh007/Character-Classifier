@@ -34,7 +34,17 @@ class IMGDS(data.Dataset):
 
     def loadimage(self,index):
         im = Image.open(self.root_dir+"/imgs/"+self.images_list[index]+".jpeg")
-        image=np.array(im)
+        if im.size[0]>im.size[1]:
+            width=100
+            height=int(im.size[1]*100/im.size[0])
+        else:
+            height=100
+            width=int(im.size[0]*100/im.size[1])
+        im=im.resize((width,height), Image.ANTIALIAS)
+        background = Image.new('RGB', (100, 100), (255, 255, 255))
+        offset = (int(round(((100 - width) / 2), 0)), int(round(((100 - height) / 2),0)))
+        background.paste(im, offset)
+        image=np.array(background)
         image=image/255
         image=image-1
         image=image.astype('float32')
@@ -45,7 +55,7 @@ class IMGDS(data.Dataset):
     def loadlabel(self,index):
         with open(self.root_dir+"/json/"+self.images_list[index]+".json") as f:
             d= json.load(f)
-            label=d['image']['character']
+            label=d['character']
             a=np.array(self.label_dict[label])
             a=torch.from_numpy(a)
             return a

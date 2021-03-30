@@ -7,7 +7,7 @@ num_classes=len(symbols)
 
 data_dir_path="/home/ubuntu/data/ocr/out"
 csv_path='/home/ubuntu/Character-Classifier/FC/hypergridcsv'
-MODELCHECKPOINT_PATH="/home/ubuntu/data/ocr/ModelPTfullrun"
+MODELCHECKPOINT_PATH="/home/ubuntu/data/ocr/ModelPTsamplerun2"
 device=None
 
 
