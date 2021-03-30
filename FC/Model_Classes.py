@@ -37,7 +37,7 @@ class Conv_block(nn.Module):
         self.conv2b=nn.Conv2d(in_channels=out_chnl,out_channels=out_chnl,kernel_size=3)
         self.conv3=nn.Conv2d(in_channels=inp,out_channels=out_chnl,kernel_size=3,dilation=2,padding=(1,1))
         '''self.instance_norm=nn.InstanceNorm2d(num_features=out_chnl*6, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)'''
-        self.layernorm=nn.LayerNorm(out_chnl*6) #CHECK WITH DIMENSION OVER NORMALIZATION NOW AT CHANNEL
+        self.layernorm=nn.LayerNorm([out_chnl*6]) #CHECK WITH DIMENSION OVER NORMALIZATION NOW AT CHANNEL
         self.drop=nn.Dropout2d(p=0.005, inplace=False)
         self.drop2=torch.nn.Dropout(p=0.2, inplace=False)
         self.pool=nn.MaxPool2d(2, stride=2, padding=0, dilation=1, return_indices=False, ceil_mode=False)
