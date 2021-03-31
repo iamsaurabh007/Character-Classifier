@@ -31,10 +31,8 @@ def sampledds(client,length):
     #characters=['A','a','P','O']
     s=length//len(characters)
     for ch in characters:
-        #myquery = { "character": ch }
-        myquery={"$and":[ {"character":ch},
-                         {"$or":[{"font_size":95},{"font_size":105},{"font_size":115}]}
-                        ]}
+        myquery = { "character": ch }
+        #myquery={"$and":[{"character":ch}]}
         p=[]
         for i in client.find(myquery):
             p.append(i['_id'])
@@ -47,4 +45,4 @@ def sampledds(client,length):
     return ls
 
 def list_to_csv(ls,filename):
-    np.savetxt(filename+".csv",ls,delimiter =", ", fmt ='% s')
+    np.savetxt(filename+".csv",ls,delimiter =", ", fmt ='% s')s
