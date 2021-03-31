@@ -19,8 +19,8 @@ def generator(path):
         
 def put_json_to_database(img,dirpath,client_collect):   #################
     with open(dirpath+img+'.json') as f:
-        data = json.load(f)
-    p=data['image']
+        p = json.load(f)
+   
     p['_id']=p.pop('image_id')
     client_collect.insert_one(p)
 
