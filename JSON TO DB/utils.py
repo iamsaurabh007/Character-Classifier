@@ -45,4 +45,4 @@ def sampledds(client,length):
     return ls
 
 def list_to_csv(ls,filename):
-    np.savetxt(filename+".csv",ls,delimiter =", ", fmt ='% s')s
+    np.savetxt(filename+".csv",ls,delimiter =", ", fmt ='% s')
