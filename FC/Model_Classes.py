@@ -91,7 +91,7 @@ class FC_Model(nn.Module):
         x=self.conv1(x)
         #print(x.shape)
         #x=x.abs()
-        x=x.sum(dim=(2,3))
+        x=x.mean(dim=(2,3))
         #print(x.shape)
         x=self.linearblock1(x)
         x=self.linearblock2(x)
